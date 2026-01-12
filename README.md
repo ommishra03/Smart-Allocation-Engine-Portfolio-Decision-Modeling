@@ -1,4 +1,4 @@
-# AI-Driven Portfolio Optimization Using Reinforcement Learning
+# Portfolio Optimization Using Reinforcement Learning
 
 > A production-style portfolio optimization framework leveraging Reinforcement Learning (RL) to learn optimal asset allocation strategies under risk–return constraints.
 
