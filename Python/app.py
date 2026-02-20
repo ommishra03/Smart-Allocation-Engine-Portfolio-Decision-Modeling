@@ -12,7 +12,7 @@ st.set_page_config(layout="wide", page_title="Alpha Engine")
 # =====================================================
 @st.cache_data
 def load_data():
-    return pd.read_csv("portfolio_output.csv")
+    return pd.read_csv("../portfolio_output.csv")
 
 df = load_data()
 
