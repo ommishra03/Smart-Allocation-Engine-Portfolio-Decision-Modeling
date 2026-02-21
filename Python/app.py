@@ -2,14 +2,14 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# =====================================================
+
 # PAGE SETUP
-# =====================================================
+
 st.set_page_config(layout="wide", page_title="Alpha Engine")
 
-# =====================================================
+
 # LOAD DATA
-# =====================================================
+
 @st.cache_data
 def load_data():
     return pd.read_csv("../portfolio_output.csv")
@@ -18,9 +18,9 @@ df = load_data()
 
 st.title("Smart Portfolio Allocation Engine")
 
-# =====================================================
+
 # SIDEBAR FILTERS
-# =====================================================
+
 st.sidebar.header("Global Filters")
 
 min_conf = st.sidebar.slider(
@@ -28,14 +28,14 @@ min_conf = st.sidebar.slider(
     0.0, 1.0, 0.5
 )
 
-# =====================================================
+
 #  APPLY CONFIDENCE FILTER FIRST
-# =====================================================
+
 filtered = df[df["Confidence"] >= min_conf].copy()
 
-# =====================================================
+
 #DYNAMIC SIGNAL ENGINE (Single Version Only)
-# =====================================================
+
 if not filtered.empty:
 
     weights = filtered["Allocation_Weight"]
@@ -69,9 +69,9 @@ if not filtered.empty:
     if signal_option != "ALL":
         filtered = filtered[filtered["Signal"] == signal_option]
 
-# =====================================================
+
 #  PRIMARY TABLE
-# =====================================================
+
 if filtered.empty:
     st.warning("No tickers match the current filter.")
     st.stop()
@@ -95,9 +95,9 @@ st.dataframe(
 
 st.divider()
 
-# =====================================================
+
 # VISUAL ANALYTICS
-# =====================================================
+
 col1, col2 = st.columns(2)
 
 with col1:
@@ -133,9 +133,9 @@ with col2:
 
     st.plotly_chart(fig_scatter, use_container_width=True)
 
-# =====================================================
+
 # Growth Distribution
-# =====================================================
+
 st.subheader("Growth Distribution")
 
 fig_hist = px.histogram(
@@ -146,9 +146,8 @@ fig_hist = px.histogram(
 
 st.plotly_chart(fig_hist, use_container_width=True)
 
-# =====================================================
 # CAPITAL ALLOCATION TREEMAP
-# =====================================================
+
 st.subheader("Capital Allocation Treemap")
 
 treemap_df = filtered[filtered["Allocation_Weight"] > 0]
